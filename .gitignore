@@ -1,0 +1,25 @@
+﻿
+# Ignore all VisualStudio output
+# https://stackoverflow.com/a/35175552/25961
+*/**/bin/Debug
+*/**/bin/Release
+*/**/obj/Debug
+*/**/obj/Release
+*/**/obj/x86
+*/**/obj/x64
+*/**/bin/x86
+*/**/bin/x64
+*/**/.vs
+*/**/*.v12.suo
+*/**/packages
+
+*.zip
+/ACS/TAS/bin/TAS_Leif_9.3.120.3_pdb
+*.sqlite
+/.vs/slnx.sqlite-journal
+/.vs
+*.patch
+*/packages/*
+*/**/*.coverage
+*/**/UpgradeLog.htm
+~*.*
