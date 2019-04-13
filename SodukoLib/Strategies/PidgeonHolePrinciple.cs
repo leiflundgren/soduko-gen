@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SodukoLib
+namespace SodukoLib.Strategies
 {
     public class PidgeonHolePrinciple : IReducer
     {
@@ -16,10 +16,10 @@ namespace SodukoLib
             String sb1 = b.ToString();
             String sb2 = b2.ToString();
 
-            IList<int> possiblesOfCoord = b2.GetPossibles(c);
             ICollection<Coord> possiblesOfInt = b2.GetPossibles(n);
 
-
+            return possiblesOfInt.Count == 1;
         }
+        public string Name => nameof(PidgeonHolePrinciple);
     }
 }

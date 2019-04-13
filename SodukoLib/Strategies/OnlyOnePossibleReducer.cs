@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SodukoLib
+namespace SodukoLib.Strategies
 {
     public class OnlyOnePossibleReducer : IReducer 
     {
@@ -19,5 +19,6 @@ namespace SodukoLib
             IList<int> possibles = b2.GetPossibles(c);
             return possibles.Count == 1;
         }
+        public string Name => nameof(OnlyOnePossibleReducer);
     }
 }
