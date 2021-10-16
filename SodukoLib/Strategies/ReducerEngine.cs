@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SodukoLib.Components;
+using System;
 using System.Collections.Generic;
 
 namespace SodukoLib
@@ -48,26 +49,50 @@ namespace SodukoLib
                 boards[b] = isSolvable;
         }
 
+        private bool TryReduce(Coord c)
+        {
+            foreach (IReducer reducer in this.Reducers)
+            {
+                if (CurrentBoard[c] > 0 && reducer.CanBeRemoved(CurrentBoard, c))
+                    return true;
+            }
+            return false;
+        }
+
+        
         private void Reduce()
         {
             Random rnd = new Random();
             int offset = rnd.Next(Board.allCoords.Length);
 
-            foreach ( IReducer reducer in this.Reducers )
+            bool reduced;
+            do
             {
-                for (int i = 0, fails = 0; fails < Board.allCoords.Length; i++)
-                {
-                    int j = (i + offset) % Board.allCoords.Length;
-                    Coord c = Board.allCoords[j];
-                    if ( CurrentBoard[c] == 0 ||  ! reducer.CanBeRemoved(CurrentBoard, c))
-                    {
-                        fails++;
-                        continue;
-                    }
+                reduced = false;
 
-                    fails = 0; // reset
-                    Remove(c);
+                foreach (Coord c in new RandomList<Coord>(Board.allCoords))
+                {
+                    if (TryReduce(c))
+                    {
+                        Remove(c);
+                        reduced = true;
+                        break;
+                    }
                 }
+            }
+            while (reduced);
+        }
+
+
+        public class ReduceFailedException : Exception
+        {
+            public readonly Board Board;
+            public readonly ICollection<IReducer> Reducers;
+
+            public ReduceFailedException(string message, Board currentBoard, ICollection<IReducer> reducers) : base(message)
+            {
+                this.Board = currentBoard;
+                this.Reducers = reducers;
             }
         }
     }

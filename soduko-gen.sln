@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28306.52
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SodukoConsole", "SodukoConsole\SodukoConsole.csproj", "{BFCEBD47-F029-4E52-AC37-D51661CD9FF0}"
 EndProject
@@ -15,7 +15,8 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BFCEBD47-F029-4E52-AC37-D51661CD9FF0}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{BFCEBD47-F029-4E52-AC37-D51661CD9FF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFCEBD47-F029-4E52-AC37-D51661CD9FF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFCEBD47-F029-4E52-AC37-D51661CD9FF0}.Debug|x86.ActiveCfg = Debug|x86
 		{BFCEBD47-F029-4E52-AC37-D51661CD9FF0}.Debug|x86.Build.0 = Debug|x86
 		{BFCEBD47-F029-4E52-AC37-D51661CD9FF0}.Release|Any CPU.ActiveCfg = Release|x86

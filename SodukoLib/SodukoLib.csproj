@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SodukoLib</RootNamespace>
     <AssemblyName>SodukoLib</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -41,7 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
+    <Compile Include="Components\RandomList.cs" />
     <Compile Include="NineGroup.cs" />
+    <Compile Include="Components\Primes.cs" />
     <Compile Include="Strategies\CombinedReducer.cs" />
     <Compile Include="Strategies\OnlyOnePossibleReducer.cs" />
     <Compile Include="Strategies\PidgeonHolePrinciple.cs" />

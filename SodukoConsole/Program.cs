@@ -29,16 +29,23 @@ namespace SodukoConsole
                 new CombinedReducer(new OnlyOnePossibleReducer(), new PidgeonHolePrinciple())
             } )
             {
-                ReducerEngine re = new ReducerEngine(board, new OnlyOnePossibleReducer());
-                TimeSpan dt = w.Elapsed;
+                try
+                {
+                    ReducerEngine re = new ReducerEngine(board, new OnlyOnePossibleReducer());
+                    TimeSpan dt = w.Elapsed;
 
-                Console.Out.WriteLine("Took board");
-                Console.Out.WriteLine(re.CompleteBoard);
-                Console.Out.WriteLine();
-                Console.Out.WriteLine("Reduced to");
-                Console.Out.WriteLine(re.CurrentBoard);
-                Console.Out.WriteLine("in " + re.History.Count + " moves, using " + reducer.Name + " in " + dt.Ticks.ToString("G") + " ticks.");
-                Console.Out.WriteLine("==================");
+                    Console.Out.WriteLine("Took board");
+                    Console.Out.WriteLine(re.CompleteBoard);
+                    Console.Out.WriteLine();
+                    Console.Out.WriteLine("Reduced to");
+                    Console.Out.WriteLine(re.CurrentBoard);
+                    Console.Out.WriteLine("in " + re.History.Count + " moves, using " + reducer.Name + " in " + dt.Ticks.ToString("G") + " ticks.");
+                    Console.Out.WriteLine("==================");
+                }
+                catch ( ReducerEngine.ReduceFailedException ex )
+                {
+                    Console.Out.WriteLine("Failed to reduce " + ex.Board);
+                }
             }
         }
     }
