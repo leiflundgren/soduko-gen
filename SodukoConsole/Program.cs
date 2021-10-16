@@ -39,7 +39,7 @@ namespace SodukoConsole
                     Console.Out.WriteLine();
                     Console.Out.WriteLine("Reduced to");
                     Console.Out.WriteLine(re.CurrentBoard);
-                    Console.Out.WriteLine("in " + re.History.Count + " moves, using " + reducer.Name + " in " + dt.Ticks.ToString("G") + " ticks.");
+                    Console.Out.WriteLine("in " + re.History.Count + " moves, using " + reducer.Name + " in " + dt.TotalMilliseconds.ToString("G") + " ms.");
                     Console.Out.WriteLine("==================");
                 }
                 catch ( ReducerEngine.ReduceFailedException ex )

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SodukoLib.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -95,5 +96,10 @@ namespace SodukoLib
         }
 
         public IList<Coord> Coords { get { return coords; } }
+
+        public IEnumerable<Coord> GetCoordsExcept(Coord c)
+        {
+            return new FilterEnumerator<Coord>(Coords, (c_) => Equals(c, c_));
+        }
     }
 }

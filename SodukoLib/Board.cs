@@ -33,6 +33,7 @@ namespace SodukoLib
         private NineGroup[] rows;
         private NineGroup[] columns;
         private NineGroup[] squares;
+        private NineGroup[] allGroups;
 
         public static readonly Coord[] allCoords;
 
@@ -76,6 +77,15 @@ namespace SodukoLib
                     this.squares[s] = new NineGroup(this, coords);
                 }
             }
+
+            allGroups = new NineGroup[rows.Length + columns.Length + squares.Length];
+            int p = 0;
+            foreach (NineGroup g in squares)
+                allGroups[p++] = g;
+            foreach (NineGroup g in rows)
+                allGroups[p++] = g;
+            foreach (NineGroup g in columns)
+                allGroups[p++] = g;
         }
 
         public Board(Board other)
@@ -118,17 +128,13 @@ namespace SodukoLib
         {
             get { return columns; }
         }
+        public IList<NineGroup> AllGroups => allGroups;
 
-        private List<NineGroup> GetGroupsContaining(Coord c)
+        public List<NineGroup> GetGroupsContaining(Coord c)
         {
             List<NineGroup> res = new List<NineGroup>();
             
-            List<NineGroup> groups = new List<NineGroup>();
-            groups.AddRange(Squares);
-            groups.AddRange(Rows);
-            groups.AddRange(Columns);
-
-            foreach (NineGroup ng in groups)
+            foreach (NineGroup ng in allGroups)
             {
                 if (ng.Contains(c) )
                     res.Add(ng);
@@ -138,12 +144,7 @@ namespace SodukoLib
 
         public bool IsPossible(Coord c, int n)
         {
-            List<NineGroup> groups = new List<NineGroup>();
-            groups.AddRange(Squares);
-            groups.AddRange(Rows);
-            groups.AddRange(Columns);
-
-            foreach (NineGroup ng in groups)
+            foreach (NineGroup ng in allGroups)
             {
                 if (!ng.Contains(c))
                     continue;
