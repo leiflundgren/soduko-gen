@@ -9,8 +9,10 @@
 */**/obj/x64
 */**/bin/x86
 */**/bin/x64
+*/**/obj
 */**/.vs
 */**/*.v12.suo
+*.pdf
 */**/packages
 
 *.zip
@@ -23,3 +25,6 @@
 */**/*.coverage
 */**/UpgradeLog.htm
 ~*.*
+
+*.user
+

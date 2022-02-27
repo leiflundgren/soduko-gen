@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SodukoLib.Strategies
 {
-    public class CombinedReducer : IReducer
+    public class CombinedReducer : ReducerBase
     {
         private List<IReducer> reducers;
 
@@ -14,15 +14,16 @@ namespace SodukoLib.Strategies
         {}
 
         public CombinedReducer(ICollection<IReducer> reducers)
+            : base(nameof(CombinedReducer))
         {
             this.reducers = new List<IReducer>(reducers);
         }
 
-        public bool CanBeRemoved(Board b, Coord c)
+        public override bool CanBeRemoved(Board b, Coord c)
         {
             return reducers.Any(r => r.CanBeRemoved(b, c));
         }
+        public override string Name => $"{nameof(CombinedReducer)} [{string.Join(", ", reducers.ConvertAll(r => r.Name))}]";
 
-        public string Name { get { return nameof(CombinedReducer) + ":[ " + string.Join(", ", reducers.ConvertAll(r => r.Name)) + " ]"; } }
     }
 }

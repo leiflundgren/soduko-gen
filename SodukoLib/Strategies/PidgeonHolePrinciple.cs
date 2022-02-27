@@ -5,9 +5,11 @@ using System.Text;
 
 namespace SodukoLib.Strategies
 {
-    public class PidgeonHolePrinciple : IReducer
+    public class PidgeonHolePrinciple : ReducerBase
     {
-        public bool CanBeRemoved(Board b, Coord c)
+        public PidgeonHolePrinciple() : base(nameof(PidgeonHolePrinciple))  {}
+
+        public override bool CanBeRemoved(Board b, Coord c)
         {
             int n = b[c];
             Board b2 = new Board(b);
@@ -20,6 +22,5 @@ namespace SodukoLib.Strategies
 
             return possiblesOfInt.Count == 1;
         }
-        public string Name => nameof(PidgeonHolePrinciple);
     }
 }

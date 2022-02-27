@@ -5,9 +5,13 @@ using System.Text;
 
 namespace SodukoLib.Strategies
 {
-    public class OnlyOnePossibleReducer : IReducer 
+    public class OnlyOnePossibleReducer : ReducerBase
     {
-        public bool CanBeRemoved(Board b, Coord c)
+        public OnlyOnePossibleReducer()
+            : base(nameof(OnlyOnePossibleReducer))
+        { }
+
+        public override bool CanBeRemoved(Board b, Coord c)
         {
             int n = b[c];
             Board b2 = new Board(b);
@@ -19,6 +23,5 @@ namespace SodukoLib.Strategies
             IList<int> possibles = b2.GetPossibles(c);
             return possibles.Count == 1;
         }
-        public string Name => nameof(OnlyOnePossibleReducer);
     }
 }

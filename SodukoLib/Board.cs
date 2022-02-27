@@ -4,29 +4,8 @@ using System.Text;
 
 namespace SodukoLib
 {
-    public class Coord
-    {
-        public int x = 0, y = 0;
 
-        public Coord(int x, int y) { this.x = x; this.y=y; }
 
-        public override bool Equals(object obj)
-        {
-            Coord other = obj as Coord;
-            return other != null && this.x == other.x && this.y == other.y;
-        }
-
-        public override int GetHashCode()
-        {
-            return x*3+y*101;
-        }
-        public override string ToString()
-        {
-            return string.Format("[{0},{1}]", x, y);
-        }
-    }
-
- 
     public class Board
     {
         private int[] values;
@@ -51,9 +30,10 @@ namespace SodukoLib
             for (int i = 0; i < this.values.Length; ++i)
                 this.values[i] = 0;
 
+
             this.rows = new NineGroup[9];
             for( int r =0; r<9; ++r ) {
-                this.rows[r] = new NineGroup(this, new Coord(r, 0), new Coord(r, 1), new Coord(r, 2), new Coord(r, 3), new Coord(r, 4), new Coord(r, 5), new Coord(r, 6), new Coord(r, 7), new Coord(r, 8));
+                this.rows[r] = new NineGroup(this,  new Coord(r, 0), new Coord(r, 1), new Coord(r, 2), new Coord(r, 3), new Coord(r, 4), new Coord(r, 5), new Coord(r, 6), new Coord(r, 7), new Coord(r, 8));
             }
 
             this.columns = new NineGroup[9];
@@ -291,5 +271,64 @@ namespace SodukoLib
             return sb.ToString();
         }
 
+        public static IEqualityComparer<Board> EqualsEverywhere => new EqualsInAll();
+        public static IEqualityComparer<Board> EqualsForSsetCoords => new EqualsInSetCoords();
+
+
+        /// <summary>
+        /// Compare two boards, only check squares that have known data (ignore value <= 0)
+        /// </summary>
+        private class EqualsInSetCoords : IEqualityComparer<Board>
+        {
+            public bool Equals(Board x, Board y)
+            {
+                foreach ( Coord c in allCoords )
+                {
+                    int vx = x[c], vy = y[c];
+                    if (vx > 0 && vy > 0 && vx != vy)
+                        return false;
+                }
+                return true;
+            }
+
+            public int GetHashCode(Board b)
+            {
+                int h = 0;
+                foreach (Coord c in allCoords)
+                {
+                    int v = b[c];
+                    if (v > 0)
+                        h = h * 19 + v * 11;
+                }
+                return h;
+            }
+        }
+        /// <summary>
+        /// Compare two boards, only check squares that have known data (ignore value <= 0)
+        /// </summary>
+        private class EqualsInAll : IEqualityComparer<Board>
+        {
+            public bool Equals(Board x, Board y)
+            {
+                foreach (Coord c in allCoords)
+                {
+                    int vx = x[c], vy = y[c];
+                    if (vx != vy)
+                        return false;
+                }
+                return true;
+            }
+
+            public int GetHashCode(Board b)
+            {
+                int h = 0;
+                foreach (Coord c in allCoords)
+                {
+                    int v = b[c];
+                    h = h * 19 + v * 11;
+                }
+                return h;
+            }
+        }
     }
 }
