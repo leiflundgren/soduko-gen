@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SodukoLib", "SodukoLib\SodukoLib.csproj", "{AB7B405D-578B-4D12-89C8-CBDB44CD529D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SodukoLib", "SodukoLib\SodukoLib.csproj", "{AB7B405D-578B-4D12-89C8-CBDB44CD529D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SodukoWeb", "SodukoWeb\SodukoWeb.csproj", "{FD4A6DAF-AE87-4F38-B511-10104B02E9A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SodukoAPI", "SodukoAPI\SodukoAPI.csproj", "{A9B01787-4AEA-4CEF-81BD-8E885554C447}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SodukoAPI", "SodukoAPI\SodukoAPI.csproj", "{A9B01787-4AEA-4CEF-81BD-8E885554C447}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SodukoConsole", "SodukoConsole\SodukoConsole.csproj", "{BFCEBD47-F029-4E52-AC37-D51661CD9FF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soduke-UrlRoute", "Soduke-UrlRoute\Soduke-UrlRoute.csproj", "{2D8924E3-DD1C-4E7E-8F65-98D47B516823}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspcore-old", "aspcore-old\aspcore-old.csproj", "{8BE6FC33-4593-4F2E-B864-69B996687037}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +54,22 @@ Global
 		{BFCEBD47-F029-4E52-AC37-D51661CD9FF0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BFCEBD47-F029-4E52-AC37-D51661CD9FF0}.Release|x86.ActiveCfg = Release|x86
 		{BFCEBD47-F029-4E52-AC37-D51661CD9FF0}.Release|x86.Build.0 = Release|x86
+		{2D8924E3-DD1C-4E7E-8F65-98D47B516823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D8924E3-DD1C-4E7E-8F65-98D47B516823}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D8924E3-DD1C-4E7E-8F65-98D47B516823}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2D8924E3-DD1C-4E7E-8F65-98D47B516823}.Debug|x86.Build.0 = Debug|Any CPU
+		{2D8924E3-DD1C-4E7E-8F65-98D47B516823}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D8924E3-DD1C-4E7E-8F65-98D47B516823}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D8924E3-DD1C-4E7E-8F65-98D47B516823}.Release|x86.ActiveCfg = Release|Any CPU
+		{2D8924E3-DD1C-4E7E-8F65-98D47B516823}.Release|x86.Build.0 = Release|Any CPU
+		{8BE6FC33-4593-4F2E-B864-69B996687037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BE6FC33-4593-4F2E-B864-69B996687037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BE6FC33-4593-4F2E-B864-69B996687037}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8BE6FC33-4593-4F2E-B864-69B996687037}.Debug|x86.Build.0 = Debug|Any CPU
+		{8BE6FC33-4593-4F2E-B864-69B996687037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BE6FC33-4593-4F2E-B864-69B996687037}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BE6FC33-4593-4F2E-B864-69B996687037}.Release|x86.ActiveCfg = Release|Any CPU
+		{8BE6FC33-4593-4F2E-B864-69B996687037}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
