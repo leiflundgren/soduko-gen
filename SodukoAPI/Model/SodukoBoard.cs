@@ -3,7 +3,7 @@
     public class SodukoBoard
     {
         public static int SODUKU_SIZE = 9;
-        public struct SodukoField
+        public class SodukoField
         {
             public char Value;
             public bool Visible;
@@ -15,8 +15,21 @@
                 Visible = visible;
             }
         }
-        public SodukoField[][] Board = GenerateEmptyBoard(SODUKU_SIZE);
+        public SodukoField[][] Board;
 
+        /// <summary>
+        /// Generates a board with initialized arrays, filled with null-values
+        /// </summary>
+        /// <param name="size">width/height of the square board</param>
+        public SodukoBoard(int size)
+        {
+            Board = new SodukoBoard.SodukoField[size][];
+            for (int row = 0; row < size; row++)
+            {
+                Board[row] = new SodukoBoard.SodukoField[size];
+            }
+        }
+         
         public static SodukoField[][] GenerateEmptyBoard(int size)
         {
             SodukoField[][] board = new SodukoField[size][];

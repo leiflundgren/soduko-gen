@@ -32,41 +32,41 @@ namespace SodukoLib
 
 
             this.rows = new NineGroup[9];
-            for( int r =0; r<9; ++r ) {
-                this.rows[r] = new NineGroup(this,  new Coord(r, 0), new Coord(r, 1), new Coord(r, 2), new Coord(r, 3), new Coord(r, 4), new Coord(r, 5), new Coord(r, 6), new Coord(r, 7), new Coord(r, 8));
+            for (int r = 0; r < 9; ++r)
+            {
+                this.rows[r] = new NineGroup(this, new Coord(r, 0), new Coord(r, 1), new Coord(r, 2), new Coord(r, 3), new Coord(r, 4), new Coord(r, 5), new Coord(r, 6), new Coord(r, 7), new Coord(r, 8));
             }
 
             this.columns = new NineGroup[9];
-            for( int c =0; c<9; ++c ) {
+            for (int c = 0; c < 9; ++c)
+            {
                 this.columns[c] = new NineGroup(this, new Coord(0, c), new Coord(1, c), new Coord(2, c), new Coord(3, c), new Coord(4, c), new Coord(5, c), new Coord(6, c), new Coord(7, c), new Coord(8, c));
             }
 
             this.squares = new NineGroup[9];
-            for ( int x=0; x<3; ++x )  {
-                for ( int y=0; y<3; ++y )  {
-                    int s = x*3+y;
+            for (int x = 0; x < 3; ++x)
+            {
+                for (int y = 0; y < 3; ++y)
+                {
+                    int s = x * 3 + y;
 
                     Coord[] coords = new Coord[9];
-                    for( int c0 =0; c0<3; ++c0 ) {
-                        int c = c0 + 3*x;
-                        for ( int r0=0; r0<3; ++r0 ) {
-                            int r = r0 + 3*y;
-                            coords[c0*3+r0] = new Coord(r, c);
+                    for (int c0 = 0; c0 < 3; ++c0)
+                    {
+                        int c = c0 + 3 * x;
+                        for (int r0 = 0; r0 < 3; ++r0)
+                        {
+                            int r = r0 + 3 * y;
+                            coords[c0 * 3 + r0] = new Coord(r, c);
                         }
                     }
                     this.squares[s] = new NineGroup(this, coords);
                 }
             }
 
-            allGroups = new NineGroup[rows.Length + columns.Length + squares.Length];
-            int p = 0;
-            foreach (NineGroup g in squares)
-                allGroups[p++] = g;
-            foreach (NineGroup g in rows)
-                allGroups[p++] = g;
-            foreach (NineGroup g in columns)
-                allGroups[p++] = g;
+            SetAllGroups();
         }
+
 
         public Board(Board other)
         {
@@ -83,6 +83,18 @@ namespace SodukoLib
                 columns[i] = new NineGroup(this, other.columns[i]);
                 squares[i] = new NineGroup(this, other.squares[i]);
             }
+            SetAllGroups();
+        }
+        private void SetAllGroups()
+        {
+            allGroups = new NineGroup[rows.Length + columns.Length + squares.Length];
+            int p = 0;
+            foreach (NineGroup g in squares)
+                allGroups[p++] = g;
+            foreach (NineGroup g in rows)
+                allGroups[p++] = g;
+            foreach (NineGroup g in columns)
+                allGroups[p++] = g;
         }
 
         public int this[int x, int y]
@@ -107,6 +119,16 @@ namespace SodukoLib
         public IList<NineGroup> Columns
         {
             get { return columns; }
+        }
+        public ICollection<Coord> Coordinates
+        {
+            get
+            {
+                List<Coord> values = new List<Coord>(rows.Length * rows[0].Count);
+                foreach (NineGroup grp in rows)
+                    values.AddRange(grp.Coords);
+                return values;
+            }
         }
         public IList<NineGroup> AllGroups => allGroups;
 
@@ -135,21 +157,7 @@ namespace SodukoLib
             return true;
         }
 
-        public static IList<T> Shuffle<T>(ICollection<T> list0)  
-        {  
-            Random rng = new Random();  
-
-            IList<T> list = new List<T>(list0);
-            int n = list.Count;  
-            while (n > 1) {  
-                n--;  
-                int k = rng.Next(n + 1);  
-                T value = list[k];  
-                list[k] = list[n];  
-                list[n] = value;  
-            }  
-            return list;
-        }
+   
 
         public IList<int> GetPossibles(Coord c)
         {
@@ -207,38 +215,6 @@ namespace SodukoLib
                 }
                 return true;
             }
-        }
-
-        public static Board Generate()
-        {
-            Random rnd = new Random();
-            Board b = new Board();
-
-            Populate(b, 0);
-            return b;
-        }
-
-        private static bool Populate(Board b, int coord_n)
-        {
-            if ( coord_n == allCoords.Length )
-                return true;
-
-            Coord c = allCoords[coord_n];
-            IList<int> possibilites = Shuffle( b.GetPossibles(c) );
-            if (possibilites.Count == 0)
-                return false;
-
-            foreach ( int n in possibilites )
-            {
-                b[c] = n;
-                //Console.Out.WriteLine(c);
-                //Console.Out.WriteLine(b);
-
-                if ( Populate(b, coord_n+1))
-                    return true;
-            }
-            b[c] = 0;
-            return false;
         }
 
         public override String ToString()

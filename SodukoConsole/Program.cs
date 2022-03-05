@@ -21,7 +21,7 @@ namespace SodukoConsole
 
             //Console.Out.WriteLine("Generated 1000 boards in " + (t1-t0).TotalMilliseconds);
             Stopwatch w = new Stopwatch();
-            Board board = Board.Generate();
+            Board board = Generator.Generate();
 
             foreach ( IReducer reducer in new IReducer[] {
                 new OnlyOnePossibleReducer(),
@@ -31,7 +31,7 @@ namespace SodukoConsole
             {
                 try
                 {
-                    ReducerEngine re = new ReducerEngine(board, new OnlyOnePossibleReducer());
+                    ReducerEngine re = new ReducerEngine(board, reducer);
                     TimeSpan dt = w.Elapsed;
 
                     Console.Out.WriteLine("Took board");

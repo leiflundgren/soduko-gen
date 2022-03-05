@@ -10,7 +10,7 @@ namespace SodukoLib
     {
         protected Board board;
         protected IList<Coord> coords;
-
+        public int Count => coords.Count;
 
         public NineGroup(Board board, params Coord[] coords)
             : this(board, (IList<Coord>)coords)
