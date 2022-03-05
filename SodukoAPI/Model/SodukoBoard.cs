@@ -1,12 +1,19 @@
 ﻿namespace SodukoAPI.Model
 {
+    [System.Diagnostics.DebuggerDisplay("SodukoBoard({Board.Length}")]
     public class SodukoBoard
     {
         public static int SODUKU_SIZE = 9;
+        [System.Diagnostics.DebuggerDisplay("SodukoField({ValueIfVisible})")]
         public class SodukoField
         {
+            [Newtonsoft.Json.JsonProperty(PropertyName ="val")]
             public char Value;
+            [Newtonsoft.Json.JsonProperty(PropertyName = "vis")]
             public bool Visible;
+
+            [Newtonsoft.Json.JsonIgnore]
+            public char ValueIfVisible => (Visible ? Value : 'x');
 
             public SodukoField() : this('\0', false) { }
             public SodukoField(char value, bool visible)

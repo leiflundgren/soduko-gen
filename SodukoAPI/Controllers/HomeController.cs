@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SodukoAPI.Model;
 using SodukoAPI.Services;
 
 namespace SodukoAPI.Controllers
@@ -19,15 +20,25 @@ namespace SodukoAPI.Controllers
         public string GenerateParsed(string[] reducers, int? percentExtra)
         {
             Model.SodukoBoard board = generator.Generate(reducers, percentExtra.GetValueOrDefault(30));
-            var options = new System.Text.Json.JsonSerializerOptions
-            {
-                WriteIndented = true,
-            };
-            string jsonString = System.Text.Json.JsonSerializer.Serialize(board, options);
+            string jsonString = JSonSerilize(board);
 
-            return jsonString; 
+            return jsonString;
 
             // return $"reducers [{string.Join(", ", reducers)}] extra={percentExtra}";
+        }
+
+        public static string JSonSerilize(SodukoBoard board)
+        {
+
+            Newtonsoft.Json.JsonSerializer serializer = new Newtonsoft.Json.JsonSerializer();
+            serializer.Formatting = Newtonsoft.Json.Formatting.None;
+
+            using (TextWriter textwriter = new StringWriter())
+            using (Newtonsoft.Json.JsonWriter writer = new Newtonsoft.Json.JsonTextWriter(textwriter))
+            {
+                serializer.Serialize(writer, board);
+                return textwriter.ToString() ?? "<null>";
+            }
         }
 
         //private Model.SodukoBoard Convert(SodukoLib.ReducerEngine reducerEngine)
@@ -67,10 +78,10 @@ namespace SodukoAPI.Controllers
         //    if ( reducer_names.Length == 1)
         //        return CreateReducer(reducer_names[0]);
 
-            
+
         //        IReducer[] reducers = Array.ConvertAll(reducer_names, name => CreateReducer(name))
         //        return new SodukoLib.Strategies.CombinedReducer(reducers);
-            
+
         //}
     }
 }
