@@ -1,10 +1,14 @@
 ﻿namespace SodukoAPI.Model
 {
     [System.Diagnostics.DebuggerDisplay("SodukoBoard({Board.Length}")]
+    [Newtonsoft.Json.JsonObject]
     public class SodukoBoard
     {
         public static int SODUKU_SIZE = 9;
         [System.Diagnostics.DebuggerDisplay("SodukoField({ValueIfVisible})")]
+    
+        
+        [Newtonsoft.Json.JsonObject]
         public class SodukoField
         {
             [Newtonsoft.Json.JsonProperty(PropertyName ="val")]

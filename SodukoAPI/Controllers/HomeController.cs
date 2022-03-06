@@ -13,19 +13,36 @@ namespace SodukoAPI.Controllers
             this.generator = generator;
         }
 
+        [HttpGet]
+        [Produces("application/json")]
+        public ActionResult<SodukoBoard> GenerateObject(string reducers = "", int? percentExtra = 30)
+        {
+            Model.SodukoBoard board = GenerateInternal(reducers, percentExtra);
+
+            return Ok(board);
+        }
+
+        [HttpGet]
+        // [Produces("application/json")]
         public string Generate(string reducers = "", int? percentExtra = 30)
         {
-            return GenerateParsed(reducers.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries), percentExtra);
-        }
-        public string GenerateParsed(string[] reducers, int? percentExtra)
-        {
-            Model.SodukoBoard board = generator.Generate(reducers, percentExtra.GetValueOrDefault(30));
-            string jsonString = JSonSerilize(board);
+            Model.SodukoBoard board = GenerateInternal(reducers, percentExtra);
 
+            string jsonString = JSonSerilize(board);
             return jsonString;
 
             // return $"reducers [{string.Join(", ", reducers)}] extra={percentExtra}";
         }
+
+
+        private SodukoBoard GenerateInternal(string reducers = "", int? percentExtra = 30)
+        {
+            string[] reducers_array = reducers.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            Model.SodukoBoard board = generator.Generate(reducers_array, percentExtra.GetValueOrDefault(30));
+            return board;
+        }
+
 
         public static string JSonSerilize(SodukoBoard board)
         {
